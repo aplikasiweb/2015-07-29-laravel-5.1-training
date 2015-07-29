@@ -12,3 +12,4 @@
 */
 
 Route::get('/', ['as' => 'home', 'uses' => 'WelcomeController@index']);
+Route::controllers(['lists' => 'ListsController']);
