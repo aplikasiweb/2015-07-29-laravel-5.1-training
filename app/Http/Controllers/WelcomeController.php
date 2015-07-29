@@ -12,7 +12,7 @@ class WelcomeController extends Controller {
             ]
         );
 
-        dd($items);
+        //dd($items);
         return view('welcome');
     }
 }
