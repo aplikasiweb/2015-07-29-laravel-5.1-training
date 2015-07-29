@@ -6,16 +6,13 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Todolist;
 
 class ListsController extends Controller
 {
     public function getIndex() {
 
-        $lists = [
-            'Vacation Planning',
-            'Grocery Shopping',
-            'Camping Trip'
-        ];
+        $lists = Todolist::all();
 
         return view('lists.index')
             ->with('lists', $lists);
