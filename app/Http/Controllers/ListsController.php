@@ -10,7 +10,7 @@ use App\Todolist;
 
 class ListsController extends Controller
 {
-    public function getIndex() {
+    public function index() {
 
         $lists = Todolist::all();
 
@@ -18,11 +18,31 @@ class ListsController extends Controller
             ->with('lists', $lists);
     }
 
-    public function getCreate() {
+    public function create() {
         return view('lists.create');
     }
 
-    public function postStore() {
+    public function store() {
         return view('lists.store');
     }
+
+    public function show($id) {
+
+        $list = Todolist::findOrFail($id);
+
+        return view('lists.show')
+            ->with('list', $list);
+    }
+
+    public function edit() {
+        return view('lists.show');
+    }
+
+    public function update() {
+        return view('lists.show');
+    }
+
+    public function delete() {
+        return view('lists.show');
+    }    
 }

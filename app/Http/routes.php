@@ -21,4 +21,5 @@ Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 Route::get('/', ['as' => 'home', 'uses' => 'WelcomeController@index']);
-Route::controllers(['lists' => 'ListsController']);
+//Route::controllers(['lists' => 'ListsController']);
+Route::resource('lists', 'ListsController');
