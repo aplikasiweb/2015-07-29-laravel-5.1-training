@@ -22,8 +22,14 @@ class ListsController extends Controller
         return view('lists.create');
     }
 
-    public function store() {
-        return view('lists.store');
+    public function store(Request $request) {
+
+        $list = new Todolist;
+        $list->name = $request->get('name');
+        $list->description = $request->get('description');
+        $list->save();
+
+        return redirect(route('lists.index'));
     }
 
     public function show($id) {
