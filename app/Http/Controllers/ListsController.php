@@ -29,7 +29,8 @@ class ListsController extends Controller
         $list->description = $request->get('description');
         $list->save();
 
-        return redirect(route('lists.index'));
+        return redirect(route('lists.index'))
+                ->with('flash_success', 'List created successfully.');;
     }
 
     public function show($id) {
