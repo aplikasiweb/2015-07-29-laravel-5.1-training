@@ -19,7 +19,11 @@ class ListsController extends Controller
     }
 
     public function create() {
-        return view('lists.create');
+
+        $list = new Todolist;
+
+        return view('lists.create')
+            ->with('list', $list); 
     }
 
     public function store(Request $request) {
@@ -30,7 +34,7 @@ class ListsController extends Controller
         $list->save();
 
         return redirect(route('lists.index'))
-                ->with('flash_success', 'List created successfully.');;
+                ->with('flash_success', 'List created successfully.');
     }
 
     public function show($id) {
@@ -41,12 +45,23 @@ class ListsController extends Controller
             ->with('list', $list);
     }
 
-    public function edit() {
-        return view('lists.show');
+    public function edit($id) {
+
+        $list = Todolist::findOrFail($id);
+
+        return view('lists.create')
+            ->with('list', $list);
     }
 
-    public function update() {
-        return view('lists.show');
+    public function update($id, Request $request) {
+
+        $list = Todolist::findOrFail($id);
+        $list->name = $request->get('name');
+        $list->description = $request->get('description');
+        $list->save();
+
+        return redirect(route('lists.edit', $id))
+                ->with('flash_success', 'List updated successfully.');
     }
 
     public function delete() {
