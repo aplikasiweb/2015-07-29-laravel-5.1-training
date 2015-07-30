@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Todolist;
 use DB;
+use App\Http\Requests\ListRequest;
 
 class ListsController extends Controller
 {
@@ -32,7 +33,7 @@ class ListsController extends Controller
             ->with('list', $list); 
     }
 
-    public function store(Request $request) {
+    public function store(ListRequest $request) {
 
         $list = new Todolist;
         $list->name = $request->get('name');
@@ -59,7 +60,7 @@ class ListsController extends Controller
             ->with('list', $list);
     }
 
-    public function update($id, Request $request) {
+    public function update($id, ListRequest $request) {
 
         $list = Todolist::findOrFail($id);
         $list->name = $request->get('name');
