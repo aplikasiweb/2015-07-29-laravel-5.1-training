@@ -7,12 +7,18 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Todolist;
+use DB;
 
 class ListsController extends Controller
 {
     public function index() {
 
+        // DB::enableQueryLog();
         $lists = Todolist::all();
+
+        // $queries = DB::getQueryLog();
+        // $last_query = end($queries);
+        // dd($last_query);
 
         return view('lists.index')
             ->with('lists', $lists);
@@ -64,7 +70,12 @@ class ListsController extends Controller
                 ->with('flash_success', 'List updated successfully.');
     }
 
-    public function delete() {
-        return view('lists.show');
+    public function delete($id) {
+
+        $list = Todolist::findOrFail($id);
+        $list->delete();
+
+        return redirect(route('lists.index'))
+                ->with('flash_success', 'List deleted successfully.');
     }    
 }
