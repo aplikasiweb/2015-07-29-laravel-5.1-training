@@ -9,13 +9,14 @@ use App\Http\Controllers\Controller;
 use App\Todolist;
 use DB;
 use App\Http\Requests\ListRequest;
+use Auth;
 
 class ListsController extends Controller
 {
     public function index() {
 
         // DB::enableQueryLog();
-        $lists = Todolist::all();
+        $lists = Todolist::where('user_id', Auth::id())->get();
 
         // $queries = DB::getQueryLog();
         // $last_query = end($queries);
@@ -36,6 +37,7 @@ class ListsController extends Controller
     public function store(ListRequest $request) {
 
         $list = new Todolist;
+        $list->user_id = Auth::id();
         $list->name = $request->get('name');
         $list->description = $request->get('description');
         $list->save();
