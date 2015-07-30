@@ -21,6 +21,9 @@ Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 Route::get('/', ['as' => 'home', 'uses' => 'WelcomeController@index']);
-//Route::controllers(['lists' => 'ListsController']);
-Route::get('lists/{lists}/delete', ['as' => 'lists.delete', 'uses' => 'ListsController@delete']);
-Route::resource('lists', 'ListsController');
+
+Route::group(['middleware' => 'auth'], function () {
+	//Route::controllers(['lists' => 'ListsController']);
+	Route::get('lists/{lists}/delete', ['as' => 'lists.delete', 'uses' => 'ListsController@delete']);
+	Route::resource('lists', 'ListsController');
+});
