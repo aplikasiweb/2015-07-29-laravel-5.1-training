@@ -13,6 +13,7 @@ class ListRequest extends Request
      */
     public function authorize()
     {
+        return \Auth::check();
     }
 
     /**
@@ -23,7 +24,7 @@ class ListRequest extends Request
     public function rules()
     {
         return [
+            'name' => ['required', 'min:4']
         ];
     }
 }
-
